@@ -3,6 +3,8 @@
 A simple python implplementation of Apriori Algorithm for frequent item set mining and association rule learning over relational databases and dataframes. <br>
 Here I aim to implement an impllroved version of the algorithm i.e. AprioriTID inspired from Agarwal,Srikant et. al. [[1]](#1)
 
+#### Status: Active
+
 ## Dataset
 UCI Machine Learning Repository Bag of Words Dataset (http://archive.ics.uci.edu/ml/datasets/Bag+of+Words) by David Newman  contains three collection of text documents 
 - Enron Emails
