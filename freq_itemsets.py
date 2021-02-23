@@ -1,8 +1,7 @@
-import pandas as pd
-import numpy as np
 import itertools
 from tqdm import tqdm
 from time import time
+import gc
 
 
 def is_infrequent(candidate, L_prev) -> bool:
@@ -33,6 +32,7 @@ class freq_itemsets:
                         continue
                     tid_gen = TID1.intersection(TID2)
                     Ck[item_gen] = tid_gen
+                    gc.collect()
         return Ck
 
     def gen_L1(self):
