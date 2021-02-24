@@ -16,10 +16,11 @@ def map_f(F, mapping):
     return F_mapped
 
 
-min_sup = [0.01, 0.05, 0.1, 0.25]
+min_sup = [0.4, 0.45, 0.5, 0.6]
 k = 5
-docs = ['data/docword.kos.txt', 'data/docword.nips.txt']
-vocab = ['data/vocab.kos.txt', 'data/vocab.nips.txt']
+data = ['kos', 'nips']
+docs = ['data/docword.nips.txt']
+vocab = ['data/vocab.nips.txt']
 
 for d, v in zip(docs, vocab):
     datagen_ = datagen(v, d)
@@ -34,3 +35,6 @@ for d, v in zip(docs, vocab):
             pickle.dump(T, f, protocol=pickle.HIGHEST_PROTOCOL)
         with open('outputs/{}_{}_{}_mapped.pickle'.format(d[5:-3], ms, k), 'wb') as f:
             pickle.dump(F_map, f, protocol=pickle.HIGHEST_PROTOCOL)
+        del F
+        del T
+        del F_map
