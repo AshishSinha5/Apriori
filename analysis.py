@@ -18,8 +18,8 @@ def map_f(F, mapping):
 
 min_sup = [0.01, 0.05, 0.1, 0.25]
 k = 5
-docs = ['data/docword.enron.txt', 'data/docword.kos.txt', 'data/docword.nips.txt']
-vocab = ['data/vocab.enron.txt', 'data/vocab.kos.txt', 'data/vocab.nips.txt']
+docs = ['data/docword.kos.txt', 'data/docword.nips.txt']
+vocab = ['data/vocab.kos.txt', 'data/vocab.nips.txt']
 
 for d, v in zip(docs, vocab):
     datagen_ = datagen(v, d)

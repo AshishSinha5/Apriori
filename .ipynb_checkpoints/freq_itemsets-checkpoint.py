@@ -1,7 +1,6 @@
 import itertools
 from tqdm import tqdm
 from time import time
-import json
 
 
 def is_infrequent(candidate, L_prev) -> bool:
@@ -10,32 +9,6 @@ def is_infrequent(candidate, L_prev) -> bool:
         if subset not in L_prev:
             return True
     return False
-
-class StreamArray(list):
-    """
-    Converts a generator into a list object that can be json serialisable
-    while still retaining the iterative nature of a generator.
-
-    IE. It converts it to a list without having to exhaust the generator
-    and keep it's contents in memory.
-    """
-    def __init__(self, generator):
-        super().__init__()
-        self.generator = generator
-        self._len = 1
-
-    def __iter__(self):
-        self._len = 0
-        for item in self.generator:
-            yield item
-            self._len += 1
-
-    def __len__(self):
-        """
-        Json parser looks for a this method to confirm whether or not it can
-        be parsed
-        """
-        return self._len
 
 
 class freq_itemsets:
@@ -48,7 +21,8 @@ class freq_itemsets:
         self.L = {}
         self.Time = []
 
-    def candidate_gen_proxy(self, k):
+    def candidate_gen(self, k) -> dict:
+        Ck = {}
         for item1, TID1 in tqdm(self.L[k - 1].items()):
             for item2, TID2 in self.L[k - 1].items():
                 if item1[:-1] == item2[:-1] and item1[-1] < item2[-1]:
@@ -56,15 +30,8 @@ class freq_itemsets:
                     if is_infrequent(item_gen, self.L[k - 1]):
                         continue
                     tid_gen = TID1.intersection(TID2)
-                    ck = {item_gen:tid_gen}
-                    yield ck
-
-    def candidate_gen(self, k):
-        with open('ck.json', 'w') as f:
-            ck = self.candidate_gen_proxy(k)
-            stream_array = StreamArray(ck)
-            for chunk in json.JSONEncoder().iterencode(stream_array):
-                f.write(chunk)
+                    Ck[item_gen] = tid_gen
+        return Ck
 
     def gen_L1(self):
         L1 = {}
@@ -78,11 +45,6 @@ class freq_itemsets:
 
     def gen_Lk(self, Ck: dict):
         Lk = {}
-        with open('ck.txt', 'r') as f:
-            s = f.readline()
-            l = s.split(':')
-            c = tuple(l[0])
-
         for c, TIDs in tqdm(Ck.items(), position=0, leave=True):
             if len(TIDs) < self.min_sup_count:
                 continue
@@ -104,7 +66,7 @@ class freq_itemsets:
             print("--------------------------------------------------")
             print("Generating Frequent Item-sets of Size {}".format(k))
             print("Generating Candidates")
-            self.candidate_gen(k)
+            Ck = self.candidate_gen(k)
             print("Generating Large Itemsets")
             self.L[k] = self.gen_Lk(Ck)
             self.Time.append(time() - s)
