@@ -27,7 +27,7 @@ As we kept increasing minimum support and length of itemset both datasets follow
 KOS dataset               |  NIPS dataset
 :-------------------------:|:-------------------------:
 ![KOS ITEMSETS](https://github.com/AshishSinha5/apriori/blob/master/plots/kos_itemset.png)  |  ![NIPS ITEMSETS](https://github.com/AshishSinha5/apriori/blob/master/plots/nips_itemset.png)
-![KOS TIME](https://github.com/AshishSinha5/apriori/blob/master/plots/kos_time.png) | ![NIPS TIME](https://github.com/AshishSinha5/apriori/blob/master/plots/kos_time.png)
+![KOS TIME](https://github.com/AshishSinha5/apriori/blob/master/plots/kos_time.png) | ![NIPS TIME](https://github.com/AshishSinha5/apriori/blob/master/plots/nips_time.png)
 
 
 ## References
