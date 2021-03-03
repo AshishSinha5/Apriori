@@ -1,7 +1,7 @@
 # Apriori Algorithm
 
 A simple python implplementation of Apriori Algorithm for frequent item set mining and association rule learning over relational databases and dataframes. <br>
-Here I aim to implement an impllroved version of the algorithm i.e. AprioriTID inspired from Agarwal,Srikant et. al. [[1]](#1)
+Here I aim to implement an impllroved version of the algorithm i.e. AprioriTID inspired from Agarwal,Srikant et al. [[1]](#1)
 
 #### Status: Active
 
